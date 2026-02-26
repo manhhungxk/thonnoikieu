@@ -54,7 +54,6 @@ header {
 <div id="lightbox" onclick="this.style.display='none'">
   <img id="lightboxImg">
 </div>
-
 <script>
 const API_KEY = "AIzaSyBepEhhvIB9HZwPSZrsyDqva3lb7-Ucres";
 const FOLDER_ID = "1DSlYutCYRzhSGxRZEmiVeKmvkq4EBCEg";
@@ -65,11 +64,14 @@ fetch(`https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key
   const g = document.getElementById("gallery");
   d.files.forEach(f => {
     const img = document.createElement("img");
-    img.src = `https://drive.google.com/uc?id=${f.id}`;
+    img.src = `https://drive.google.com/uc?id=${f.id}&export=view`;
+    img.loading = "lazy";
+
     img.onclick = () => {
       document.getElementById("lightboxImg").src = img.src;
       document.getElementById("lightbox").style.display = "flex";
     };
+
     g.appendChild(img);
   });
 });
